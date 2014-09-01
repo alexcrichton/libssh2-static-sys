@@ -7,7 +7,7 @@ endif
 OPTS = \
 	--enable-shared=no \
 	--disable-examples-build \
-	--prefix=$(OUT_DIR) \
+	--prefix="$(OUT_DIR)" \
 
 export CFLAGS := $(CFLAGS) -fPIC
 PWD := $(CURDIR)
