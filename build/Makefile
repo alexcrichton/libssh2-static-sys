@@ -6,6 +6,8 @@ endif
 
 ifneq ($(findstring mingw,$(TARGET)),)
 STATIC_SUFFIX=lib
+# Otherwise apparently the makefiles get corrupted and aren't valid
+export LD=$(shell which ld)
 else
 STATIC_SUFFIX=a
 endif
