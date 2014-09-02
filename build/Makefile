@@ -27,8 +27,8 @@ all:
 	[ -f "$(OUT_DIR)/build/Makefile" ] && \
 		make -C "$(OUT_DIR)/build" distclean || true
 	(cd "$(OUT_DIR)/build" && "$(PWD)/$(LIBSSH2)/configure" $(OPTS))
-	make -C "$(OUT_DIR)"
-	make -C "$(OUT_DIR)" install
+	make -C "$(OUT_DIR)/build"
+	make -C "$(OUT_DIR)/build" install
 	cp "$(OUT_DIR)/lib/libssh2.$(STATIC_SUFFIX)" "$(OUT_DIR)"
 	cp "$(OUT_DIR)/lib/pkgconfig/libssh2.pc" "$(OUT_DIR)"
 
