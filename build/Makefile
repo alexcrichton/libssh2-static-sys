@@ -28,7 +28,11 @@ all:
 		make -C "$(OUT_DIR)/build" distclean || true
 	(cd "$(OUT_DIR)/build" && "$(PWD)/$(LIBSSH2)/configure" $(OPTS))
 	make -C "$(OUT_DIR)/build"
-	make -C "$(OUT_DIR)/build" install
+	rm -rf "$(OUT_DIR)/include" "$(OUT_DIR)/lib"
+	mkdir -p "$(OUT_DIR)/lib/pkgconfig"
+	cp -r "$(PWD)/$(LIBSSH2)/include" "$(OUT_DIR)"
+	cp "$(OUT_DIR)/build/src/.libs/libssh2.$(STATIC_SUFFIX)" "$(OUT_DIR)/lib"
+	cp "$(OUT_DIR)/build/libssh2.pc" "$(OUT_DIR)/lib/pkgconfig"
 	cp "$(OUT_DIR)/lib/libssh2.$(STATIC_SUFFIX)" "$(OUT_DIR)"
 	cp "$(OUT_DIR)/lib/pkgconfig/libssh2.pc" "$(OUT_DIR)"
 
