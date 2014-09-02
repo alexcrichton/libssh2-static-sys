@@ -15,7 +15,7 @@ endif
 OPTS = \
 	--enable-shared=no \
 	--disable-examples-build \
-	--prefix="$(OUT_DIR)" \
+	--prefix="$(OUT_DIR)"
 
 export CFLAGS := $(CFLAGS) -fPIC
 PWD := $(CURDIR)
@@ -23,8 +23,10 @@ LIBSSH2 := libssh2-1.4.4-20140901
 
 all:
 	rm -rf "$(OUT_DIR)/include" "$(OUT_DIR)/lib"
-	mkdir -p "$(OUT_DIR)"
-	(cd "$(OUT_DIR)" && $(PWD)/$(LIBSSH2)/configure $(OPTS))
+	mkdir -p "$(OUT_DIR)/build"
+	[ -f "$(OUT_DIR)/build/Makefile" ] && \
+		make -C "$(OUT_DIR)/build" distclean || true
+	(cd "$(OUT_DIR)/build" && "$(PWD)/$(LIBSSH2)/configure" $(OPTS))
 	make -C "$(OUT_DIR)"
 	make -C "$(OUT_DIR)" install
 	cp "$(OUT_DIR)/lib/libssh2.$(STATIC_SUFFIX)" "$(OUT_DIR)"
