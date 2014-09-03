@@ -1,7 +1,7 @@
 ifneq ($(findstring i686,$(TARGET)),)
-CFLAGS=-m32
+export CFLAGS := $(CFLAGS) -m32
 else
-CFLAGS=-m64
+export CFLAGS := $(CFLAGS) -fPIC -m64
 endif
 
 ifneq ($(findstring mingw,$(TARGET)),)
@@ -17,7 +17,6 @@ OPTS = \
 	--disable-examples-build \
 	--prefix="$(OUT_DIR)"
 
-export CFLAGS := $(CFLAGS) -fPIC
 PWD := $(CURDIR)
 LIBSSH2 := libssh2-1.4.4-20140901
 
