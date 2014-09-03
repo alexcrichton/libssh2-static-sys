@@ -1,1 +1,10 @@
+# libgit2 doesn't build with CRLF?!?!
+# But of course only on windows
 * text eol=lf
+
+# Assorted files in libgit2
+*.dsp text eol=auto
+*.dsw text eol=auto
+*.foot text eol=auto
+*.head text eol=auto
+*.3 text eol=auto
