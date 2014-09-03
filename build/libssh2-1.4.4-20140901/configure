@@ -16424,10 +16424,6 @@ $as_echo "$as_me: Try --with-libz-prefix=PATH if you know you have it" >&6;}
 
 $as_echo "#define LIBSSH2_HAVE_ZLIB 1" >>confdefs.h
 
-    if test "${LIBSREQUIRED}" != ""; then
-      LIBSREQUIRED="${LIBSREQUIRED},"
-    fi
-    LIBSREQUIRED="${LIBSREQUIRED}zlib"
   fi
 fi
 
