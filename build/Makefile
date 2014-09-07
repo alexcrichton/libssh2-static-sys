@@ -5,11 +5,8 @@ export CFLAGS := $(CFLAGS) -fPIC -m64
 endif
 
 ifneq ($(findstring mingw,$(TARGET)),)
-STATIC_SUFFIX=lib
 # Otherwise apparently the makefiles get corrupted and aren't valid
 export LD=$(shell which ld)
-else
-STATIC_SUFFIX=a
 endif
 
 OPTS = \
@@ -28,8 +25,10 @@ all:
 	(cd "$(OUT_DIR)/build" && "$(PWD)/$(LIBSSH2)/configure" $(OPTS))
 	make -C "$(OUT_DIR)/build/src"
 	cp -r "$(PWD)/$(LIBSSH2)/include" "$(OUT_DIR)"
-	cp "$(OUT_DIR)/build/src/.libs/libssh2.$(STATIC_SUFFIX)" "$(OUT_DIR)/lib"
-	cp "$(OUT_DIR)/build/src/.libs/libssh2.$(STATIC_SUFFIX)" "$(OUT_DIR)"
+	cp "$(OUT_DIR)/build/src/.libs/libssh2.lib" "$(OUT_DIR)/lib" || exit 0
+	cp "$(OUT_DIR)/build/src/.libs/libssh2.a" "$(OUT_DIR)/lib" || exit 0
+	cp "$(OUT_DIR)/build/src/.libs/libssh2.lib" "$(OUT_DIR)" || exit 0
+	cp "$(OUT_DIR)/build/src/.libs/libssh2.a" "$(OUT_DIR)" || exit 0
 	cp "$(OUT_DIR)/build/libssh2.pc" "$(OUT_DIR)/lib/pkgconfig"
 	cp "$(OUT_DIR)/build/libssh2.pc" "$(OUT_DIR)"
 
