@@ -23,7 +23,7 @@ all:
 	[ -f "$(OUT_DIR)/build/Makefile" ] && \
 		make -C "$(OUT_DIR)/build" distclean || true
 	(cd "$(OUT_DIR)/build" && "$(PWD)/$(LIBSSH2)/configure" $(OPTS))
-	make -C "$(OUT_DIR)/build/src"
+	make -C "$(OUT_DIR)/build/src" -j$(NUM_JOBS)
 	cp -r "$(PWD)/$(LIBSSH2)/include" "$(OUT_DIR)"
 	cp "$(OUT_DIR)/build/src/.libs/libssh2.lib" "$(OUT_DIR)/lib/libssh2.a" || exit 0
 	cp "$(OUT_DIR)/build/src/.libs/libssh2.a" "$(OUT_DIR)/lib/libssh2.a" || exit 0
