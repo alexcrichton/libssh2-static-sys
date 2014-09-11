@@ -1,7 +1,7 @@
 ifneq ($(findstring i686,$(TARGET)),)
-export CFLAGS := $(CFLAGS) -m32
+export CFLAGS := $(CFLAGS) -m32 -ffunction-sections -fdata-sections
 else
-export CFLAGS := $(CFLAGS) -fPIC -m64
+export CFLAGS := $(CFLAGS) -fPIC -m64 -ffunction-sections -fdata-sections
 endif
 
 ifneq ($(findstring mingw,$(TARGET)),)
@@ -17,7 +17,11 @@ OPTS = \
 PWD := $(CURDIR)
 LIBSSH2 := libssh2-1.4.4-20140901
 
+# If libcurl exists locally, don't do anything. Otherwise go and build curl
 all:
+	pkg-config --exists libssh2 || $(MAKE) build
+
+build:
 	rm -rf "$(OUT_DIR)/include" "$(OUT_DIR)/lib" "$(OUT_DIR)/build"
 	mkdir -p "$(OUT_DIR)/build" "$(OUT_DIR)/lib/pkgconfig"
 	[ -f "$(OUT_DIR)/build/Makefile" ] && \
