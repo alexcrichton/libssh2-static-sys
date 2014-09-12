@@ -7,9 +7,10 @@ endif
 ifneq ($(findstring mingw,$(TARGET)),)
 # Otherwise apparently the makefiles get corrupted and aren't valid
 export LD=$(shell which ld)
+OPTS := --without-openssl --with-wincng
 endif
 
-OPTS = \
+OPTS := $(OPTS) \
 	--enable-shared=no \
 	--disable-examples-build \
 	--prefix="$(OUT_DIR)"
